@@ -1,0 +1,172 @@
+Gmail diagnostic update — 2026-11-13
+
+SQLite/local: python -m unittest discover -s tests -v
+126 tests: 117 passed, 9 PostgreSQL-only tests skipped.
+
+Local PostgreSQL 17: python tests/run_postgres_suite.py test_gmail_diagnostics test_gmail_connect
+18 passed (10 diagnostic tests + 8 OAuth tests).
+
+Node UI: node --test tests/gmail_diagnostics_ui.cjs tests/admin_ui.cjs tests/serverless_ui.cjs
+9 passed (3 new diagnostic UI tests, 5 admin tests, 1 serverless suite).
+node tests/ui_workflow.cjs: PASS
+node --check outreach/static/gmail-test.js: PASS
+
+Provider calls substituted; no actual email sent. Production GitHub/Vercel deploy, real Gmail delivery and reply receipt: NOT RUN.
+Browser E2E: NOT RUN for this update; previously blocked by runtime restrictions. DOM fixture verification is not a browser rendering test.
+
+Detailed local suite output:
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+test_six_parallel_browser_sessions_share_database_without_logout_collision (test_admin_http.AdminHTTPTests.test_six_parallel_browser_sessions_share_database_without_logout_collision) ... {'initial': {'inserted': 20}, 'directory_pilot': {'inserted': 3, 'skipped': 0, 'campaign_id': 2}}
+ok
+test_independent_sessions_csrf_public_ids_logout_and_audit (test_admin_sessions.AdminSessionsTest.test_independent_sessions_csrf_public_ids_logout_and_audit) ... ok
+test_last_seen_refresh_does_not_block_authenticated_read_during_writer (test_admin_sessions.AdminSessionsTest.test_last_seen_refresh_does_not_block_authenticated_read_during_writer) ... ok
+test_login_requires_username_and_rotates_only_current_browser (test_admin_sessions.AdminSessionsTest.test_login_requires_username_and_rotates_only_current_browser) ... ok
+test_migration_from_016_preserves_records_and_expires_old_sessions (test_admin_sessions.AdminSessionsTest.test_migration_from_016_preserves_records_and_expires_old_sessions) ... ok
+test_offline_reset_invalidates_sessions_and_keeps_gmail_cipher (test_admin_sessions.AdminSessionsTest.test_offline_reset_invalidates_sessions_and_keeps_gmail_cipher) ... ok
+test_parallel_login_and_company_writes (test_admin_sessions.AdminSessionsTest.test_parallel_login_and_company_writes) ... ok
+test_password_is_bootstrap_only_and_registration_is_absent (test_admin_sessions.AdminSessionsTest.test_password_is_bootstrap_only_and_registration_is_absent) ... ok
+test_reset_during_password_verification_prevents_stale_session_issue (test_admin_sessions.AdminSessionsTest.test_reset_during_password_verification_prevents_stale_session_issue) ... ok
+test_revoke_one_others_self_and_expiry (test_admin_sessions.AdminSessionsTest.test_revoke_one_others_self_and_expiry) ... ok
+test_wal_restore_and_no_overwrite (test_backup.BackupTest.test_wal_restore_and_no_overwrite) ... ok
+test_company_campaign_evidence_and_normalized_duplicates (test_core.CoreAPITest.test_company_campaign_evidence_and_normalized_duplicates) ... ok
+test_csv_excel_export_filter_and_import_rollback (test_core.CoreAPITest.test_csv_excel_export_filter_and_import_rollback) ... ok
+test_live_ratios_exclude_auto_and_unattributed_deals (test_core.CoreAPITest.test_live_ratios_exclude_auto_and_unattributed_deals)
+Insert historical fixtures only. No delivery function is called. ... ok
+test_login_csrf_origin_logout (test_core.CoreAPITest.test_login_csrf_origin_logout) ... ok
+test_metrics_unique_research_denominator_and_no_test_sends (test_core.CoreAPITest.test_metrics_unique_research_denominator_and_no_test_sends) ... ok
+test_seed_replay_preserves_edit_and_message_conflict (test_core.CoreAPITest.test_seed_replay_preserves_edit_and_message_conflict) ... ok
+test_driver_connection_error_does_not_disclose_credentials (test_database_config.DatabaseConfigTests.test_driver_connection_error_does_not_disclose_credentials) ... ok
+test_invalid_url_is_not_echoed_or_used_as_local_path (test_database_config.DatabaseConfigTests.test_invalid_url_is_not_echoed_or_used_as_local_path) ... ok
+test_local_launcher_retains_sqlite (test_database_config.DatabaseConfigTests.test_local_launcher_retains_sqlite) ... ok
+test_remote_url_takes_precedence_over_local_file (test_database_config.DatabaseConfigTests.test_remote_url_takes_precedence_over_local_file) ... ok
+test_vercel_without_remote_database_never_opens_sqlite (test_database_config.DatabaseConfigTests.test_vercel_without_remote_database_never_opens_sqlite) ... ok
+test_approval_required_and_atomic_dedup (test_delivery.DeliveryTest.test_approval_required_and_atomic_dedup) ... ok
+test_confirmed_non_delivery_requires_fresh_approval (test_delivery.DeliveryTest.test_confirmed_non_delivery_requires_fresh_approval) ... ok
+test_crm_retry_and_match_existing (test_delivery.DeliveryTest.test_crm_retry_and_match_existing) ... ok
+test_draft_and_mode_freeze (test_delivery.DeliveryTest.test_draft_and_mode_freeze) ... ok
+test_followup_and_meeting_need_new_approval (test_delivery.DeliveryTest.test_followup_and_meeting_need_new_approval) ... ok
+test_form_actual_loopback_delivery (test_delivery.DeliveryTest.test_form_actual_loopback_delivery) ... ok
+test_gmail_live_adapter_with_mocked_google (test_delivery.DeliveryTest.test_gmail_live_adapter_with_mocked_google) ... ok
+test_hubspot_new_company_upsert_is_stable (test_delivery.DeliveryTest.test_hubspot_new_company_upsert_is_stable) ... ok
+test_immutable_source_exclusion_and_usable_contact (test_delivery.DeliveryTest.test_immutable_source_exclusion_and_usable_contact) ... ok
+test_interrupted_dispatched_job (test_delivery.DeliveryTest.test_interrupted_dispatched_job) ... ok
+test_opportunity_explicit_source_only (test_delivery.DeliveryTest.test_opportunity_explicit_source_only) ... ok
+test_reply_poll_classification_and_refusal (test_delivery.DeliveryTest.test_reply_poll_classification_and_refusal) ... ok
+test_scope_and_exclusion (test_delivery.DeliveryTest.test_scope_and_exclusion) ... ok
+test_suppression_cancels_every_channel (test_delivery.DeliveryTest.test_suppression_cancels_every_channel) ... ok
+test_unknown_is_never_retried (test_delivery.DeliveryTest.test_unknown_is_never_retried) ... ok
+test_directories_rotate_paginate_retain_provenance_and_never_assume_eligibility (test_discovery.DiscoveryTests.test_directories_rotate_paginate_retain_provenance_and_never_assume_eligibility) ... ok
+test_failed_and_recovered_index_not_cached_as_success (test_discovery.DiscoveryTests.test_failed_and_recovered_index_not_cached_as_success) ... ok
+test_member_label_not_accepted_if_not_on_actual_corporate_page (test_discovery.DiscoveryTests.test_member_label_not_accepted_if_not_on_actual_corporate_page) ... ok
+test_multiple_official_sources_rotate_with_limit_one (test_discovery.DiscoveryTests.test_multiple_official_sources_rotate_with_limit_one) ... ok
+test_official_source_job_new_and_repeat_safe (test_discovery.DiscoveryTests.test_official_source_job_new_and_repeat_safe) ... ok
+test_scope_and_zero_key_default_selection (test_discovery.DiscoveryTests.test_scope_and_zero_key_default_selection) ... ok
+test_ai_import_evidence_and_stale_rejection (test_engine.ResearchTests.test_ai_import_evidence_and_stale_rejection) ... ok
+test_candidate_must_match_confirmed_sector_and_location (test_engine.ResearchTests.test_candidate_must_match_confirmed_sector_and_location) ... ok
+test_dual_channel_restriction_and_dedup (test_engine.ResearchTests.test_dual_channel_restriction_and_dedup) ... ok
+test_guard_private_mixed_answers_and_redirects (test_engine.ResearchTests.test_guard_private_mixed_answers_and_redirects) ... ok
+test_metrics_snapshot_and_no_api_key (test_engine.ResearchTests.test_metrics_snapshot_and_no_api_key) ... ok
+test_recheck_downgrade_and_retain_historical_evidence (test_engine.ResearchTests.test_recheck_downgrade_and_retain_historical_evidence) ... ok
+test_refresh_auto_copy_preserve_manual_and_revalidate (test_engine.ResearchTests.test_refresh_auto_copy_preserve_manual_and_revalidate) ... ok
+test_retry_after_persists_and_crawl_delay_is_respected (test_engine.ResearchTests.test_retry_after_persists_and_crawl_delay_is_respected) ... ok
+test_robots_refusal (test_engine.ResearchTests.test_robots_refusal) ... ok
+test_rules_generation_and_message_versions (test_engine.ResearchTests.test_rules_generation_and_message_versions) ... ok
+test_scheduler_dedup_pause_resume_and_expired_lease (test_engine.ResearchTests.test_scheduler_dedup_pause_resume_and_expired_lease) ... ok
+test_unverified_candidate_not_inserted (test_engine.ResearchTests.test_unverified_candidate_not_inserted) ... ok
+test_root_entrypoint_exports_the_existing_authenticated_application (test_entrypoint.EntrypointTests.test_root_entrypoint_exports_the_existing_authenticated_application) ... ok
+test_changed_page_restriction_and_ambiguous_result (test_form_delivery.FormAdapterTest.test_changed_page_restriction_and_ambiguous_result) ... ok
+test_guarded_request_sequence (test_form_delivery.FormAdapterTest.test_guarded_request_sequence) ... ok
+test_static_form_submitted_once_to_loopback_fixture (test_form_delivery.FormAdapterTest.test_static_form_submitted_once_to_loopback_fixture) ... ok
+test_any_mailbox_switch_and_explicit_sender_override (test_gmail_connect.GmailConnectTest.test_any_mailbox_switch_and_explicit_sender_override) ... ok
+test_client_replacement_preserves_active_and_commits_after_google_consent (test_gmail_connect.GmailConnectTest.test_client_replacement_preserves_active_and_commits_after_google_consent) ... ok
+test_consent_refresh_profile_encryption_and_replay (test_gmail_connect.GmailConnectTest.test_consent_refresh_profile_encryption_and_replay) ... ok
+test_foreign_session_state_and_declined_consent (test_gmail_connect.GmailConnectTest.test_foreign_session_state_and_declined_consent) ... ok
+test_mid_consent_settings_change_rejects_stale_callback (test_gmail_connect.GmailConnectTest.test_mid_consent_settings_change_rejects_stale_callback) ... ok
+test_public_callback_is_inert_and_setup_is_private (test_gmail_connect.GmailConnectTest.test_public_callback_is_inert_and_setup_is_private) ... ok
+test_switch_without_sender_update_and_failed_consent_keeps_connection (test_gmail_connect.GmailConnectTest.test_switch_without_sender_update_and_failed_consent_keeps_connection) ... ok
+test_wrong_account_partial_scope_and_timeout (test_gmail_connect.GmailConnectTest.test_wrong_account_partial_scope_and_timeout) ... ok
+test_allowlist_opt_in_approval_csrf_and_login (test_gmail_diagnostics.GmailDiagnosticTests.test_allowlist_opt_in_approval_csrf_and_login) ... ok
+test_allowlist_removal_and_suppression_after_preview (test_gmail_diagnostics.GmailDiagnosticTests.test_allowlist_removal_and_suppression_after_preview) ... ok
+test_ambiguous_result_and_interrupted_claim_never_resends (test_gmail_diagnostics.GmailDiagnosticTests.test_ambiguous_result_and_interrupted_claim_never_resends) ... ok
+test_expired_preview_connection_and_sender_changes (test_gmail_diagnostics.GmailDiagnosticTests.test_expired_preview_connection_and_sender_changes) ... ok
+test_malformed_allowlist_fails_closed (test_gmail_diagnostics.GmailDiagnosticTests.test_malformed_allowlist_fails_closed) ... ok
+test_real_transport_fixed_message_one_recipient_and_no_sales_records (test_gmail_diagnostics.GmailDiagnosticTests.test_real_transport_fixed_message_one_recipient_and_no_sales_records) ... ok
+test_replay_after_success_and_process_restart_never_resends (test_gmail_diagnostics.GmailDiagnosticTests.test_replay_after_success_and_process_restart_never_resends) ... ok
+test_template_injection_cannot_change_approved_message_or_recipient (test_gmail_diagnostics.GmailDiagnosticTests.test_template_injection_cannot_change_approved_message_or_recipient) ... ok
+test_thread_reply_detection_deduplicated_and_wrong_mailbox_blocked (test_gmail_diagnostics.GmailDiagnosticTests.test_thread_reply_detection_deduplicated_and_wrong_mailbox_blocked) ... ok
+test_two_sessions_concurrently_send_only_one_message (test_gmail_diagnostics.GmailDiagnosticTests.test_two_sessions_concurrently_send_only_one_message) ... ok
+test_eight_axes_preserve_sources_hypothesis_and_uncertainty (test_insights.InsightsTests.test_eight_axes_preserve_sources_hypothesis_and_uncertainty) ... ok
+test_enough_samples_and_separated_intervals_only (test_insights.InsightsTests.test_enough_samples_and_separated_intervals_only) ... ok
+test_small_cohorts_no_advice_exclude_wrong_time_mode_campaign_and_double_replies (test_insights.InsightsTests.test_small_cohorts_no_advice_exclude_wrong_time_mode_campaign_and_double_replies) ... ok
+test_foreign_evidence_and_missing_attribution_rejected (test_local_ai.LocalModelTests.test_foreign_evidence_and_missing_attribution_rejected) ... ok
+test_genuine_http_roundtrip_saves_analysis_and_four_drafts (test_local_ai.LocalModelTests.test_genuine_http_roundtrip_saves_analysis_and_four_drafts) ... ok
+test_public_sources_changed_while_model_was_running (test_local_ai.LocalModelTests.test_public_sources_changed_while_model_was_running) ... ok
+test_remote_model_blocked_before_sending_data (test_local_ai.LocalModelTests.test_remote_model_blocked_before_sending_data) ... ok
+test_first_start_from_extracted_zip_without_execute_permission (test_mac_launcher.MacLauncherTest.test_first_start_from_extracted_zip_without_execute_permission) ... ok
+test_explicit_sender_override_beats_legacy_environment (test_mailbox_binding.MailboxBindingTest.test_explicit_sender_override_beats_legacy_environment) ... ok
+test_followup_cannot_use_old_mailbox_thread_after_sender_change (test_mailbox_binding.MailboxBindingTest.test_followup_cannot_use_old_mailbox_thread_after_sender_change) ... ok
+test_legacy_footer_binding_and_unknown_history_is_never_guessed (test_mailbox_binding.MailboxBindingTest.test_legacy_footer_binding_and_unknown_history_is_never_guessed) ... ok
+test_queued_send_binds_approval_and_rechecks_switch_before_claim (test_mailbox_binding.MailboxBindingTest.test_queued_send_binds_approval_and_rechecks_switch_before_claim) ... ok
+test_switch_during_poll_keeps_token_thread_reply_and_cursor_bound (test_mailbox_binding.MailboxBindingTest.test_switch_during_poll_keeps_token_thread_reply_and_cursor_bound) ... ok
+test_switch_while_profile_verifies_stops_before_thread_lookup (test_mailbox_binding.MailboxBindingTest.test_switch_while_profile_verifies_stops_before_thread_lookup) ... ok
+test_auto_worker_never_uses_manual_job_and_shares_real_capacity (test_manual_delivery.ManualDeliveryTest.test_auto_worker_never_uses_manual_job_and_shares_real_capacity) ... ok
+test_concurrent_single_handoff_and_uncertain_outcome (test_manual_delivery.ManualDeliveryTest.test_concurrent_single_handoff_and_uncertain_outcome) ... ok
+test_explicit_approval_hash_and_recheck (test_manual_delivery.ManualDeliveryTest.test_explicit_approval_hash_and_recheck) ... ok
+test_manual_form_and_followup_with_no_gmail_thread (test_manual_delivery.ManualDeliveryTest.test_manual_form_and_followup_with_no_gmail_thread) ... ok
+test_manual_without_provider_and_metrics (test_manual_delivery.ManualDeliveryTest.test_manual_without_provider_and_metrics) ... ok
+test_test_mode_and_stop_after_handoff (test_manual_delivery.ManualDeliveryTest.test_test_mode_and_stop_after_handoff) ... ok
+test_from_public_source_to_manual_receipt_and_won_deal (test_noapi_journey.KeylessJourneyTests.test_from_public_source_to_manual_receipt_and_won_deal) ... ok
+test_crashed_claim_and_no_facts_produce_actionable_partial (test_pipeline.ResearchPipelineTests.test_crashed_claim_and_no_facts_produce_actionable_partial) ... ok
+test_no_members_no_false_success (test_pipeline.ResearchPipelineTests.test_no_members_no_false_success) ... ok
+test_saved_company_no_network_no_new_contact_timestamps_and_no_send (test_pipeline.ResearchPipelineTests.test_saved_company_no_network_no_new_contact_timestamps_and_no_send) ... ok
+test_concurrent_claim_is_once_per_campaign (test_postgres.PostgreSQLTests.test_concurrent_claim_is_once_per_campaign) ... skipped 'PostgreSQL integration DSN not configured'
+test_concurrent_cold_start_migrations_are_idempotent (test_postgres.PostgreSQLTests.test_concurrent_cold_start_migrations_are_idempotent) ... skipped 'PostgreSQL integration DSN not configured'
+test_duplicate_and_reference_errors_are_sanitized_and_transaction_recovers (test_postgres.PostgreSQLTests.test_duplicate_and_reference_errors_are_sanitized_and_transaction_recovers) ... skipped 'PostgreSQL integration DSN not configured'
+test_explicit_fixture_id_does_not_collide_with_generated_id (test_postgres.PostgreSQLTests.test_explicit_fixture_id_does_not_collide_with_generated_id) ... skipped 'PostgreSQL integration DSN not configured'
+test_independent_apps_share_saved_data_and_sessions_after_cold_start (test_postgres.PostgreSQLTests.test_independent_apps_share_saved_data_and_sessions_after_cold_start) ... skipped 'PostgreSQL integration DSN not configured'
+test_manual_units_resume_saved_pipeline_without_external_send (test_postgres.PostgreSQLTests.test_manual_units_resume_saved_pipeline_without_external_send) ... skipped 'PostgreSQL integration DSN not configured'
+test_nested_rollback_and_parameter_literals (test_postgres.PostgreSQLTests.test_nested_rollback_and_parameter_literals) ... skipped 'PostgreSQL integration DSN not configured'
+test_serverless_lease_excludes_concurrent_invocation (test_postgres.PostgreSQLTests.test_serverless_lease_excludes_concurrent_invocation) ... skipped 'PostgreSQL integration DSN not configured'
+test_six_parallel_browser_sessions_write_shared_database_and_logout_independently (test_postgres.PostgreSQLTests.test_six_parallel_browser_sessions_write_shared_database_and_logout_independently) ... skipped 'PostgreSQL integration DSN not configured'
+test_crm_new_companies_are_first_and_existing_rotate_by_oldest_sync (test_queue_order.QueueOrderTests.test_crm_new_companies_are_first_and_existing_rotate_by_oldest_sync) ... ok
+test_saved_research_chooses_never_processed_then_oldest_prior_run (test_queue_order.QueueOrderTests.test_saved_research_chooses_never_processed_then_oldest_prior_run) ... ok
+test_existing_domains_normalized_names_and_named_campaign_stay_untouched (test_research_pilot.PilotTests.test_existing_domains_normalized_names_and_named_campaign_stay_untouched) ... ok
+test_fresh_launch_preserves_original_twenty_and_loads_three_without_drafts (test_research_pilot.PilotTests.test_fresh_launch_preserves_original_twenty_and_loads_three_without_drafts) ... ok
+test_upgrade_from_first_seed_and_replay_preserve_edits (test_research_pilot.PilotTests.test_upgrade_from_first_seed_and_replay_preserve_edits) ... ok
+test_authorized_but_disabled_needs_no_database (test_serverless.CronAuthorizationTests.test_authorized_but_disabled_needs_no_database) ... ok
+test_missing_wrong_or_malformed_secret_never_runs_work (test_serverless.CronAuthorizationTests.test_missing_wrong_or_malformed_secret_never_runs_work) ... ok
+test_deployment_timeout_is_shorter_than_persisted_leases (test_serverless.CronLeaseTests.test_deployment_timeout_is_shorter_than_persisted_leases) ... ok
+test_failure_is_sanitized_and_releases_lease (test_serverless.CronLeaseTests.test_failure_is_sanitized_and_releases_lease) ... ok
+test_idle_lane_falls_back_without_processing_two_units (test_serverless.CronLeaseTests.test_idle_lane_falls_back_without_processing_two_units) ... ok
+test_manual_processing_ignores_only_scheduler_gate (test_serverless.CronLeaseTests.test_manual_processing_ignores_only_scheduler_gate) ... ok
+test_one_unit_and_fairness_persist_across_invocations (test_serverless.CronLeaseTests.test_one_unit_and_fairness_persist_across_invocations) ... ok
+test_sqlite_is_rejected_for_scheduled_production_execution (test_serverless.CronLeaseTests.test_sqlite_is_rejected_for_scheduled_production_execution) ... ok
+test_unexpired_lease_skips_work_and_expired_owner_cannot_release_successor (test_serverless.CronLeaseTests.test_unexpired_lease_skips_work_and_expired_owner_cannot_release_successor) ... ok
+test_admin_cookie_is_not_cron_authorization (test_serverless.ManualTickAPITests.test_admin_cookie_is_not_cron_authorization) ... ok
+test_manual_tick_requires_admin_and_csrf_and_rejects_cross_origin (test_serverless.ManualTickAPITests.test_manual_tick_requires_admin_and_csrf_and_rejects_cross_origin) ... ok
+
+----------------------------------------------------------------------
+Ran 126 tests in 90.488s
+
+OK (skipped=9)
+
+Detailed UI output:
+✔ current and other sessions are separate and user-agent markup stays plain text (33.486048ms)
+✔ individual logout removes only the chosen remote session with a CSRF-protected request (9.300051ms)
+✔ logout of all other browsers keeps the current session usable (7.055825ms)
+✔ logout of the current browser returns to the login page (7.534005ms)
+✔ a 401 response clears session data and offers login again (8.255674ms)
+✔ preview requires checkbox; double clicks send once with CSRF and immutable snapshot (13.36767ms)
+✔ network uncertainty clears approval and never retries (6.619426ms)
+✔ no targets disables sending; changing recipient invalidates prior preview (2.948398ms)
+PASS worker single POST, CSRF, duplicate-click guard, completion and no automatic retry
+✔ tests/serverless_ui.cjs (163.007964ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 221.288548
